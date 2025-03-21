@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EZWeek - Your Weekly Planner</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    h1 { color: #4CAF50; }
+    textarea, input, button { width: 100%; margin: 10px 0; padding: 10px; font-size: 16px; }
+    pre { background: #f0f0f0; padding: 10px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>EZWeek 🗓️</h1>
+  <p>Tell me what you need to do, and when you're busy:</p>
+
+  <label>Tasks (one per line):</label>
+  <textarea id="tasks" rows="5" placeholder="e.g. Do homework, Soccer practice, Walk dog"></textarea>
+
+  <label>Busy Times (like meetings, appointments):</label>
+  <textarea id="busy" rows="5" placeholder="e.g. Monday 3-4pm, Wednesday 5-6pm"></textarea>
+
+  <button onclick="makeSchedule()">Make My Schedule</button>
+
+  <h2>Your Weekly Plan:</h2>
+  <pre id="output">...</pre>
+
+  <script>
+    function makeSchedule() {
+      const tasks = document.getElementById("tasks").value.split("\n").filter(t => t.trim());
+      const busy = document.getElementById("busy").value.split("\n").map(b => b.trim().toLowerCase());
+      const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+      let schedule = {};
+
+      for (let day of days) {
+        schedule[day] = [];
+        let hour = 16; // Start at 4pm after school
+        let count = 0;
+
+        for (let task of tasks) {
+          let timeSlot = `${hour}:00–${hour+1}:00`;
+          let busyTime = `${day.toLowerCase()} ${hour}-${hour+1}pm`;
+
+          if (!busy.includes(busyTime)) {
+            schedule[day].push(`${timeSlot}: ${task}`);
+            hour++;
+            count++;
+          }
+
+          if (count >= 2) break; // Limit 2 tasks per day for now
+        }
+      }
+
+      let result = "";
+      for (let day of days) {
+        result += `${day}:\n`;
+        if (schedule[day].length === 0) {
+          result += "  Free day 🎉\n";
+        } else {
+          for (let item of schedule[day]) {
+            result += "  " + item + "\n";
+          }
+        }
+        result += "\n";
+      }
+
+      document.getElementById("output").textContent = result;
+    }
+  </script>
+</body>
+</html>
