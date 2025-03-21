@@ -7,24 +7,26 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: linear-gradient(to right, #4CAF50, #2E8B57);
+      color: white;
       text-align: center;
       padding: 20px;
     }
     .container {
-      max-width: 500px;
+      max-width: 600px;
       background: white;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       margin: auto;
+      color: black;
     }
     h1 {
       color: #4CAF50;
     }
     p.intro {
       font-size: 16px;
-      color: #555;
+      color: #333;
     }
     textarea, button {
       width: 100%;
@@ -40,9 +42,10 @@
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
+      border: none;
     }
     button:hover {
-      background: #45a049;
+      background: #2E8B57;
     }
     .output {
       background: #eef;
@@ -50,11 +53,20 @@
       border-radius: 5px;
       text-align: left;
     }
+    .image-container img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>EZWeek 🗓️</h1>
+    <div class="image-container">
+      <img src="https://source.unsplash.com/600x300/?calendar,planning" alt="Weekly planning">
+    </div>
     <p class="intro">EZWeek is your personal AI-powered weekly planner! Simply enter your tasks and busy times, and let EZWeek organize your week efficiently. Stay productive and never miss an important event again! 🎯</p>
 
     <label>Tasks (one per line):</label>
