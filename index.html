@@ -112,6 +112,12 @@
       cursor: pointer;
       margin-top: 10px;
     }
+    .premium-features {
+      display: none;
+    }
+    .premium-features.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -152,6 +158,15 @@
     <p>Send USDT to the wallet below and message support to unlock Premium:</p>
     <div class="wallet-box" id="wallet">0xdA9a4f99f1Dc5Db6a5FF4A005FaB4f0A19c54069</div>
     <button class="copy-btn" onclick="copyWallet()">📋 Copy Wallet Address</button>
+
+    <div class="premium-features" id="premiumFeatures">
+      <h3>Exclusive Premium Features:</h3>
+      <ul>
+        <li>6 additional schedule blocks</li>
+        <li>Smart AI task optimization</li>
+        <li>Custom themes and layouts</li>
+      </ul>
+    </div>
   </section>
 
   <footer>
@@ -203,6 +218,12 @@
       navigator.clipboard.writeText(wallet).then(() => {
         alert("Wallet address copied to clipboard!");
       });
+    }
+
+    // Temporary premium activation logic for testing
+    function activatePremium() {
+      document.getElementById("premiumFeatures").classList.add("active");
+      alert("Premium features activated! (This is a test function for now)");
     }
   </script>
 </body>
