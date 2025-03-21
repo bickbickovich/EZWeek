@@ -1,28 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>EZWeek - Your Weekly Planner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EZWeek - AI Weekly Scheduler</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
-    h1 { color: #4CAF50; }
-    textarea, input, button { width: 100%; margin: 10px 0; padding: 10px; font-size: 16px; }
-    pre { background: #f0f0f0; padding: 10px; white-space: pre-wrap; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin: auto;
+    }
+    h1 {
+      color: #4CAF50;
+    }
+    textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .output {
+      background: #eef;
+      padding: 15px;
+      border-radius: 5px;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
-  <h1>EZWeek 🗓️</h1>
-  <p>Tell me what you need to do, and when you're busy:</p>
+  <div class="container">
+    <h1>EZWeek 🗓️</h1>
+    <p>Plan your week with AI-powered scheduling!</p>
 
-  <label>Tasks (one per line):</label>
-  <textarea id="tasks" rows="5" placeholder="e.g. Do homework, Soccer practice, Walk dog"></textarea>
+    <label>Tasks (one per line):</label>
+    <textarea id="tasks" rows="4" placeholder="e.g. Do homework, Play games, Gym"></textarea>
 
-  <label>Busy Times (like meetings, appointments):</label>
-  <textarea id="busy" rows="5" placeholder="e.g. Monday 3-4pm, Wednesday 5-6pm"></textarea>
+    <label>Busy Times (like meetings, appointments):</label>
+    <textarea id="busy" rows="3" placeholder="e.g. Monday 3-4pm, Wednesday 5-6pm"></textarea>
 
-  <button onclick="makeSchedule()">Make My Schedule</button>
+    <button onclick="makeSchedule()">📅 Make My Schedule</button>
 
-  <h2>Your Weekly Plan:</h2>
-  <pre id="output">...</pre>
+    <h2>Your Weekly Plan:</h2>
+    <div id="output" class="output">(Your schedule will appear here)</div>
+  </div>
 
   <script>
     function makeSchedule() {
@@ -45,26 +86,25 @@
             hour++;
             count++;
           }
-
-          if (count >= 2) break; // Limit 2 tasks per day for now
+          if (count >= 2) break; // Limit 2 tasks per day
         }
       }
 
       let result = "";
       for (let day of days) {
-        result += `${day}:\n`;
+        result += `<strong>${day}:</strong><br>`;
         if (schedule[day].length === 0) {
-          result += "  Free day 🎉\n";
+          result += "<em>Free day 🎉</em><br><br>";
         } else {
           for (let item of schedule[day]) {
-            result += "  " + item + "\n";
+            result += `${item}<br>`;
           }
+          result += "<br>";
         }
-        result += "\n";
       }
-
-      document.getElementById("output").textContent = result;
+      document.getElementById("output").innerHTML = result;
     }
   </script>
 </body>
 </html>
+
