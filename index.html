@@ -95,12 +95,22 @@
       color: #fff;
       text-align: center;
     }
-    footer {
-      background: #111;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #aaa;
+    .wallet-box {
+      background: #333;
+      padding: 15px;
+      border-radius: 10px;
+      word-break: break-word;
+      font-family: monospace;
+      margin: 10px 0;
+    }
+    .copy-btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -138,8 +148,10 @@
   <section id="premium" class="premium">
     <h2>🚀 Upgrade to Premium</h2>
     <p>Unlock smart AI task optimization, custom themes, and more features to take your productivity to the next level.</p>
-    <p style="margin-top:10px;"><strong>Only 4.99 USDT!</strong></p>
-    <button onclick="payWithCrypto()">💳 Pay with USDT</button>
+    <p style="margin-top:10px;"><strong>Only 4.99 USDT</strong></p>
+    <p>Send USDT to the wallet below and message support to unlock Premium:</p>
+    <div class="wallet-box" id="wallet">0xdA9a4f99f1Dc5Db6a5FF4A005FaB4f0A19c54069</div>
+    <button class="copy-btn" onclick="copyWallet()">📋 Copy Wallet Address</button>
   </section>
 
   <footer>
@@ -186,8 +198,11 @@
       document.getElementById("output").textContent = result;
     }
 
-    function payWithCrypto() {
-      alert("To upgrade to EZWeek Premium, send 4.99 USDT to our wallet: 0xYourCryptoWalletHere. After payment, contact support to unlock premium features!");
+    function copyWallet() {
+      const wallet = document.getElementById("wallet").textContent;
+      navigator.clipboard.writeText(wallet).then(() => {
+        alert("Wallet address copied to clipboard!");
+      });
     }
   </script>
 </body>
